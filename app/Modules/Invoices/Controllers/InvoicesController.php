@@ -5,12 +5,13 @@ declare(strict_types=1);
 namespace App\Modules\Invoices\Controllers;
 
 use App\Modules\Invoices\Models\Invoice;
+use App\Modules\Invoices\Requests\ChangeInvoiceStatusRequest;
 
 final class InvoicesController
 {
     public function show(Invoice $invoice): Invoice
     {
-        return $invoice;
+        return $invoice->load('company');
     }
 
     public function approve(ChangeInvoiceStatusRequest $invoice): void
