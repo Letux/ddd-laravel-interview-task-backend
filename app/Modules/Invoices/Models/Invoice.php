@@ -8,10 +8,12 @@ use App\Domain\Casts\DateCast;
 use App\Domain\Casts\DateTimeCast;
 use App\Domain\Enums\StatusEnum;
 use App\Modules\Companies\Model\Company;
+use App\Modules\Products\Models\Product;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Invoice extends Model
 {
@@ -29,5 +31,11 @@ class Invoice extends Model
     public function company(): BelongsTo
     {
         return $this->belongsTo(Company::class);
+    }
+
+    public function products(): BelongsToMany
+    {
+        return $this->belongsToMany(Product::class, 'invoice_product_lines')
+            ->withPivot('quantity');
     }
 }

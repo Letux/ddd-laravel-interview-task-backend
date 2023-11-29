@@ -11,7 +11,7 @@ final class InvoicesController
 {
     public function show(Invoice $invoice): Invoice
     {
-        return $invoice->load('company');
+        return $invoice->load(['company', 'products']);
     }
 
     public function approve(ChangeInvoiceStatusRequest $invoice): void
