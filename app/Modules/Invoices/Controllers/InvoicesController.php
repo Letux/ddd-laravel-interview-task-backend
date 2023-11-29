@@ -1,22 +1,24 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Modules\Invoices\Controllers;
 
 use App\Modules\Invoices\Models\Invoice;
 
 final class InvoicesController
 {
-    public function show(Invoice $invoice)
+    public function show(Invoice $invoice): Invoice
+    {
+        return $invoice;
+    }
+
+    public function approve(ChangeInvoiceStatusRequest $invoice): void
     {
         //
     }
 
-    public function approve(ChangeInvoiceStatusRequest $invoice)
-    {
-        //
-    }
-
-    public function reject(ChangeInvoiceStatusRequest $invoice)
+    public function reject(ChangeInvoiceStatusRequest $invoice): void
     {
         //
     }
