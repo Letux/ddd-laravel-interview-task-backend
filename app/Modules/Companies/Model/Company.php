@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace App\Modules\Companies\Model;
 
 use App\Domain\Casts\DateTimeCast;
-use App\Modules\Companies\VOs\AddressVO;
+use App\Domain\VOs\AddressVO;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 
-class Company extends Model
+final class Company extends Model
 {
     use HasUuids;
 

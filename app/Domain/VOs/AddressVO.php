@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Modules\Companies\VOs;
+namespace App\Domain\VOs;
 
 final readonly class AddressVO
 {

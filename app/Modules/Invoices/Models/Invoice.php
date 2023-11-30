@@ -9,13 +9,14 @@ use App\Domain\Casts\DateTimeCast;
 use App\Domain\Enums\StatusEnum;
 use App\Modules\Companies\Model\Company;
 use App\Modules\Products\Models\Product;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class Invoice extends Model
+final class Invoice extends Model
 {
     use HasFactory;
     use HasUuids;
@@ -37,5 +38,12 @@ class Invoice extends Model
     {
         return $this->belongsToMany(Product::class, 'invoice_product_lines')
             ->withPivot('quantity');
+    }
+
+    protected function total(): Attribute
+    {
+        return new Attribute(
+            get: fn () => $this->products->sum(fn ($product) => $product->price->value * $product->pivot->quantity)
+        );
     }
 }
