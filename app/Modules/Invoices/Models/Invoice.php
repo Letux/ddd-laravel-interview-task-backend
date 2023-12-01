@@ -40,6 +40,27 @@ final class Invoice extends Model
             ->withPivot('quantity');
     }
 
+    public function canBeApproved(): bool
+    {
+        return $this->status === StatusEnum::DRAFT;
+    }
+
+    public function isApproved(): bool
+    {
+        return $this->status === StatusEnum::APPROVED;
+    }
+
+    public function saveStatus(StatusEnum $status): void
+    {
+        $this->status = $status;
+        $this->save();
+    }
+
+    public function isRejected(): bool
+    {
+        return $this->status === StatusEnum::REJECTED;
+    }
+
     protected function total(): Attribute
     {
         return new Attribute(
