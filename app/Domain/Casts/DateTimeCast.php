@@ -21,10 +21,10 @@ final class DateTimeCast implements CastsAttributes
      */
     public function set($model, string $key, mixed $value, array $attributes): array
     {
-        if (!$value instanceof DateTimeVO) {
-            throw new InvalidArgumentException('The given value is not an DateTimeVO instance.');
+        if ($value instanceof DateTimeVO) {
+            return [$key => $value->date];
+        } else {
+            return [$key => $value];
         }
-
-        return [$key => $value->date];
     }
 }
