@@ -19,6 +19,10 @@ final readonly class InvoiceService
 {
     public static function show(Invoice $invoice): InvoiceDTO
     {
+        // TODO Add boundaries
+        // CompanyRepository::getById($invoice->company_id);
+        // ProductRepository::getByIds($invoice->products->pluck('id')->toArray());
+
         return new InvoiceDTO(
             $invoice->load(['company', 'products']),
             CompanyVO::fromArray(config('company'))
